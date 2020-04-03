@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import { Footer } from "./components/footer/Footer";
 import { Header } from "./components/header/Header";
 import { Converter } from "./components/converter/Converter";
 import { Stats } from "./components/stats/Stats";
@@ -32,6 +33,7 @@ export const App = () => {
         <Converter refetchStats={refetch} />
         <Stats stats={data.stats} />
       </div>
+      <Footer />
     </div>
   );
 };

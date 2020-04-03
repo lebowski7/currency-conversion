@@ -1,8 +1,18 @@
 .Stats {
   line-height: 1.8;
-  margin: 50px 0;
+  margin: 40px 0;
+  display: flex;
+  justify-content: space-around;
+  @media only screen and (max-width: 640px) {
+    display: block;
+  }
 
   h2 {
+    font-size: 20px;
     border-bottom: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .Stats__highlight {
+    color: #daa7ee;
   }
 }

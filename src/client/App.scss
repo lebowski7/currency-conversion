@@ -1,11 +1,7 @@
 .App {
-  background: #8b2f97;
-  background: -webkit-linear-gradient(to right, #435fcf, #8b2f97);
-  background: linear-gradient(to right, #435fcf, #8b2f97);
-
   color: #fff;
   font-family: 'Nunito Sans', sans-serif;
-  height: 100%;
+  box-sizing: border-box;
 
   * {
     box-sizing: border-box;
@@ -13,7 +9,8 @@
 
   &__wrapper {
     max-width: 800px;
+    min-width: 320px;
     margin: auto;
-    padding: 0 20px;
+    padding: 0 20px 60px;
   }
 }
