@@ -30,6 +30,11 @@
     }
   }
 
+  &__search {
+    width: calc(100% - 30px);
+    margin: 5px 15px 15px;
+  }
+
   &__options {
     display: none;
     overflow: auto;

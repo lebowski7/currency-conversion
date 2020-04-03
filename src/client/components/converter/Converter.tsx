@@ -33,7 +33,7 @@ interface IProps {
 }
 
 export const Converter = ({ refetchStats }: IProps) => {
-  const [amount, setAmount] = useState<number>(1);
+  const [amount, setAmount] = useState<number | string>(1);
   const [fromCurrency, setFromCurrency] = useState<string>("USD");
   const [destinationCurrency, setDestinationCurrency] = useState<string>("EUR");
   const [conversionResult, setConversionResult] = useState<number | null>(null);
@@ -63,7 +63,9 @@ export const Converter = ({ refetchStats }: IProps) => {
             className="Converter__input"
             type="number"
             value={amount}
-            onChange={(e) => setAmount(parseFloat(e.target.value))}
+            onChange={(e) =>
+              setAmount(e.target.value ? parseFloat(e.target.value) : "")
+            }
           />
         </div>
         <div className="Converter__form__item">
@@ -75,7 +77,6 @@ export const Converter = ({ refetchStats }: IProps) => {
               setConversionResult(null);
             }}
             selected={fromCurrency}
-            className=""
           />
         </div>
         <div className="Converter__form__item">
@@ -87,7 +88,6 @@ export const Converter = ({ refetchStats }: IProps) => {
               setConversionResult(null);
             }}
             selected={destinationCurrency}
-            className=""
           />
         </div>
         <div className="Converter__form__item">
@@ -95,6 +95,10 @@ export const Converter = ({ refetchStats }: IProps) => {
             className="Converter__button"
             onClick={(e) => {
               e.preventDefault();
+              if (!amount) {
+                alert("Insert amount.");
+                return;
+              }
               getConversion({
                 variables: {
                   fromCurrency,
