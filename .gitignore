@@ -10,3 +10,4 @@ node_modules
 .env.production.local
 
 /.idea/
+/src/server/data/database.json

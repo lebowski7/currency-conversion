@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon src/server/index.ts",
-    "dev": "parcel src/client/index.html --port 3000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "parcel src/client/index.html --port 3000"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
 import { updateStats } from "./StatsService";
 
+// TODO - this needs to be replaced by API call
 const ratesObject = require("./data/rates.json");
 
 export class ConversionModel {
