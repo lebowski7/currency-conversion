@@ -51,9 +51,14 @@
     background-color: #00b4ee;
     color: #eef8ff;
     cursor: pointer;
+    font-size: 20px;
 
     &:hover {
       background-color: #2fbbee;
+    }
+
+    &[disabled] {
+      background-color: #4d8aaa;
     }
   }
 

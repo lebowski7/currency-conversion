@@ -1,18 +1,13 @@
-import Currencies from "./CurrenciesModel";
-import { ConversionModel } from "./ConversionModel";
-import { getStats } from "./StatsService";
+import Currencies from "./Currencies";
+import { conversion } from "./Conversion";
+import { getStats } from "./Stats";
 
 export const resolvers = {
   Query: {
     currencies: () => Currencies.getAll(),
     currency: (_, { code }) => Currencies.getOne(code),
     conversion: (_, { fromCurrency, destinationCurrency, amount }) => {
-      const Conversion = new ConversionModel(
-        fromCurrency,
-        destinationCurrency,
-        amount
-      );
-      return Conversion.convert();
+      return conversion(fromCurrency, destinationCurrency, amount);
     },
     stats: () => getStats(),
   },

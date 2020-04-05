@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ICurrency } from "~shared/types";
+import { ICurrency } from "~types";
 import "./CurrencySelector.scss";
 import "currency-flags/dist/currency-flags.min.css";
 

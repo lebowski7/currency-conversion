@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { useSpring, animated } from "react-spring";
+import {
+  DEFAULT_DESTINATION_CURRENCY,
+  DEFAULT_FROM_CURRENCY,
+} from "../../../config";
 import { CurrencySelector } from "../currency-selector/CurrencySelector";
 import "./Converter.scss";
 
@@ -34,16 +38,23 @@ interface IProps {
 
 export const Converter = ({ refetchStats }: IProps) => {
   const [amount, setAmount] = useState<number | string>(1);
-  const [fromCurrency, setFromCurrency] = useState<string>("USD");
-  const [destinationCurrency, setDestinationCurrency] = useState<string>("EUR");
+  const [fromCurrency, setFromCurrency] = useState<string>(
+    DEFAULT_FROM_CURRENCY
+  );
+  const [destinationCurrency, setDestinationCurrency] = useState<string>(
+    DEFAULT_DESTINATION_CURRENCY
+  );
   const [conversionResult, setConversionResult] = useState<number | null>(null);
   const animation = useSpring({ height: conversionResult ? 100 : 0 });
 
   const { loading, data: currenciesData } = useQuery(CURRENCIES_QUERY);
 
-  const [getConversion, { data }] = useLazyQuery(CONVERSION_QUERY, {
-    fetchPolicy: "no-cache",
-  });
+  const [getConversion, { data, loading: loadingResult }] = useLazyQuery(
+    CONVERSION_QUERY,
+    {
+      fetchPolicy: "no-cache",
+    }
+  );
 
   useEffect(() => {
     if (data && data.conversion) {
@@ -92,6 +103,7 @@ export const Converter = ({ refetchStats }: IProps) => {
         </div>
         <div className="Converter__form__item">
           <button
+            disabled={loadingResult}
             className="Converter__button"
             onClick={(e) => {
               e.preventDefault();
@@ -108,7 +120,7 @@ export const Converter = ({ refetchStats }: IProps) => {
               });
             }}
           >
-            Convert
+            {loadingResult ? "Loading" : "Convert"}
           </button>
         </div>
       </form>

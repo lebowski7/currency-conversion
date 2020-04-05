@@ -1,0 +1,3 @@
+export const CURRENCY_APP_ID = "e423dd00ce2b48998bed68606b85d02d";
+export const DEFAULT_FROM_CURRENCY = "USD";
+export const DEFAULT_DESTINATION_CURRENCY = "EUR";

@@ -22,11 +22,13 @@ export const updateStats = (
   USDAddition: number,
   destinationCurrency: string
 ) => {
-  const currentStats = getStats();
-
-  const destinationCurrencies = [...currentStats.destinationCurrencies];
+  const {
+    destinationCurrencies,
+    totalUSDConverted,
+    totalConversionRequests,
+  } = getStats();
   const selectedCurrency = destinationCurrencies.find(
-    (currency) => currency.code === destinationCurrency
+    (c) => c.code === destinationCurrency
   );
   if (selectedCurrency) {
     selectedCurrency.popularity = selectedCurrency.popularity + 1;
@@ -36,13 +38,14 @@ export const updateStats = (
       popularity: 1,
     });
   }
-
-  destinationCurrencies.sort((a, b) => (a.popularity < b.popularity ? 1 : -1));
-
-  const newStats = {
-    destinationCurrencies: destinationCurrencies,
-    totalUSDConverted: currentStats.totalUSDConverted + USDAddition,
-    totalConversionRequests: currentStats.totalConversionRequests + 1,
-  };
-  return db.get("stats").assign(newStats).write();
+  return db
+    .get("stats")
+    .assign({
+      destinationCurrencies: destinationCurrencies.sort((a, b) =>
+        a.popularity < b.popularity ? 1 : -1
+      ),
+      totalUSDConverted: totalUSDConverted + USDAddition,
+      totalConversionRequests: totalConversionRequests + 1,
+    })
+    .write();
 };
